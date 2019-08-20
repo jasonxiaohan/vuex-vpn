@@ -34,38 +34,39 @@ export default {
 
     created() {
         // Mock
-        this.courseList = [
-            {
-                id: "1",
-                thumb:
-                    "//img1.mukewang.com/5cb831fd0949d9f306000338-590-330.jpg",
-                title: "学习vuex",
-                description: "2312",
-                charge: "",
-                userStatus: 0,
-                vipLevel: 0
-            },
-            {
-                id: "2",
-                thumb:
-                    "//img1.mukewang.com/5cb831fd0949d9f306000338-590-330.jpg",
-                title: "实战课程",
-                description: "2312",
-                charge: "实战课程",
-                userStatus: 1,
-                vipLevel: 0
-            },
-            {
-                id: "3",
-                thumb:
-                    "//img1.mukewang.com/5cb831fd0949d9f306000338-590-330.jpg",
-                title: "v12会员专享课程",
-                description: "2312",
-                charge: "v12会员专享",
-                userStatus: 2,
-                vipLevel: 12
-            }
-        ];
+        // this.courseList = [
+        //     {
+        //         id: "1",
+        //         thumb:
+        //             "//img1.mukewang.com/5cb831fd0949d9f306000338-590-330.jpg",
+        //         title: "学习vuex",
+        //         description: "2312",
+        //         charge: "",
+        //         userStatus: 0,
+        //         vipLevel: 0
+        //     },
+        //     {
+        //         id: "2",
+        //         thumb:
+        //             "//img1.mukewang.com/5cb831fd0949d9f306000338-590-330.jpg",
+        //         title: "实战课程",
+        //         description: "2312",
+        //         charge: "实战课程",
+        //         userStatus: 1,
+        //         vipLevel: 0
+        //     },
+        //     {
+        //         id: "3",
+        //         thumb:
+        //             "//img1.mukewang.com/5cb831fd0949d9f306000338-590-330.jpg",
+        //         title: "v12会员专享课程",
+        //         description: "2312",
+        //         charge: "v12会员专享",
+        //         userStatus: 2,
+        //         vipLevel: 12
+        //     }
+        // ];
+        this.getPlan();
     },
     computed: {
         ...mapState(["userStatus", "vipLevel"]),
@@ -102,9 +103,22 @@ export default {
                 return false;
             }
         },
+        // 退出
         logout() {
-            localStorage.removeItem("account");
+            sessionStorage.removeItem("account");
             this.$router.push('./login')
+        },
+        getPlan(){
+            this.$ajax({
+                method: 'get',
+                url: this.$store.state.siteroot+'/vpn/user/plan',               
+            }).then(response =>{
+                if(response.data.code == 0) {
+                    this.courseList = response.data.data;
+                }
+            }).catch(error=>{
+                console.log(error);
+            });
         }
     }
 };

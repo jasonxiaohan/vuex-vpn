@@ -6,9 +6,9 @@
         <div class="card-info">
             <div class="card-info__name">
                 {{course.title}}
-                <div class="card-info__desc" v-html="course.description"></div>
+                <div class="card-info__desc" v-html="course.money"></div>
             </div>
-            <div class="card-info__oth" v-if="course.charge">{{course.charge}}</div>
+            <div class="card-info__oth" v-if="course.offerMoney">{{course.offerMoney}}</div>
             <div class="card-info__oth" v-else>免费课程</div>
         </div>
     </div>

@@ -24,7 +24,7 @@ Vue.prototype.$store = store
 Vue.prototype.$ajax = axios
 
 router.beforeEach((to, from, next) => {
-    if (localStorage.account || to.path === "/login") {
+    if (sessionStorage.account || to.path === "/login") {
         next()
     } else {
         next({

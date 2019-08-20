@@ -67,7 +67,7 @@ export default {
                     store.commit("login",{
                         account: that.form.account
                     });
-                    localStorage.account = that.form.account;
+                    sessionStorage.account = that.form.account;
                     store.commit("setMemberInfo",{
                         userStatus: 0,
                         vipLevel: 0
